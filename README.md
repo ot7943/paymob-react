@@ -8,46 +8,23 @@
   <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License">
 </p>
 
-# Paymob React
-
-A lightweight, type-safe React package for integrating Paymob payment services into your web applications. Built with TypeScript and React, this package provides a seamless way to handle both card and wallet payments.
-
-## Features 🚀
-
-- ✨ Simple, intuitive API
-- 🔒 Type-safe implementation
-- 💳 Support for card payments
-- 📱 Support for wallet payments
-- 🛡️ Built-in error handling
-- 📦 Zero dependencies (except React)
-- 📝 Comprehensive TypeScript types
+Paymob React 💳 is a lightweight package designed to streamline online payment integration with Paymob services. It's built using React and TypeScript, providing a seamless development experience for incorporating secure payment functionality into your web applications.
 
 ## Installation 🔨
 
-```bash
+To install Paymob React, use npm or yarn:
+
+\`\`\`bash
 npm install paymob-react
 # or
 yarn add paymob-react
-# or
-pnpm add paymob-react
-```
+\`\`\`
 
-## Prerequisites 📋
-
-Before using this package, you'll need:
-
-1. A Paymob account - [Sign up here](https://paymob.com)
-2. API Key from your [Paymob dashboard](https://accept.paymob.com/portal2/en/settings)
-3. Integration IDs for:
-   - Card payments
-   - Wallet payments (if using wallet payments)
-4. Iframe ID for the payment form
-
-## Usage 💻
+## Usage
 
 ### Card Payment 💳
 
-```typescript
+\`\`\`typescript
 import React from "react";
 import { startCardProcess } from "paymob-react";
 
@@ -78,17 +55,17 @@ function CardPaymentExample() {
   return (
     <div>
       <h1>Card Payment Example</h1>
-      <button onClick={handleCardPayment}>Pay with Card</button>
+      <button onClick={handleCardPayment}>Start Card Payment</button>
     </div>
   );
 }
 
 export default CardPaymentExample;
-```
+\`\`\`
 
 ### Wallet Payment 💸
 
-```typescript
+\`\`\`typescript
 import React from "react";
 import { startWalletProcess } from "paymob-react";
 
@@ -120,110 +97,50 @@ function WalletPaymentExample() {
   return (
     <div>
       <h1>Wallet Payment Example</h1>
-      <button onClick={handleWalletPayment}>Pay with Wallet</button>
+      <button onClick={handleWalletPayment}>Start Wallet Payment</button>
     </div>
   );
 }
 
 export default WalletPaymentExample;
-```
+\`\`\`
 
-## API Reference 📚
+## Configuration
 
-### Card Payment Parameters
+Before using the package, you'll need:
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| amount | number | Payment amount in currency's smallest unit (e.g., cents) |
-| currency | string | Currency code (e.g., "EGP", "USD") |
-| courseTitle | string | Name or title of the product/service |
-| courseDescription | string | Description of the product/service |
-| firstName | string | Customer's first name |
-| lastName | string | Customer's last name |
-| email | string | Customer's email address |
-| phoneNumber | string | Customer's phone number with country code |
-| userId | number | Unique identifier for the customer |
-| courseId | number | Unique identifier for the product/service |
-| paymobApiKey | string | Your Paymob API key |
-| cardIntegrationId | number | Paymob card integration ID |
-| iframeId | number | Paymob iframe ID |
+1. A Paymob account
+2. API Key from your Paymob dashboard
+3. Integration IDs for card and/or wallet payments
+4. Iframe ID for the payment form
 
-### Wallet Payment Parameters
-Includes all card payment parameters plus:
+## Error Handling
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| walletIntegrationId | number | Paymob wallet integration ID |
-| mobileNumber | string | Customer's mobile number for wallet |
+All payment functions throw errors that should be caught and handled appropriately:
 
-## Error Handling 🚨
-
-The package includes comprehensive error handling. Always wrap payment calls in try-catch blocks:
-
-```typescript
+\`\`\`typescript
 try {
   await startCardProcess({...});
 } catch (error) {
-  if (error instanceof Error) {
-    // Handle specific error types
-    console.error("Payment failed:", error.message);
-  }
-  // Implement appropriate error UI feedback
+  console.error("Payment failed:", error);
+  // Handle the error appropriately
 }
-```
+\`\`\`
 
-## Best Practices 👌
+## How to Contribute 🤝
 
-1. **Environment Variables**: Store sensitive data (API keys, integration IDs) in environment variables:
-   ```typescript
-   paymobApiKey: process.env.REACT_APP_PAYMOB_API_KEY,
-   cardIntegrationId: process.env.REACT_APP_CARD_INTEGRATION_ID,
-   ```
-
-2. **Loading States**: Implement loading states while payment is processing:
-   ```typescript
-   const [isProcessing, setIsProcessing] = useState(false);
-
-   const handlePayment = async () => {
-     setIsProcessing(true);
-     try {
-       await startCardProcess({...});
-     } catch (error) {
-       console.error(error);
-     } finally {
-       setIsProcessing(false);
-     }
-   };
-   ```
-
-3. **Validation**: Validate all required fields before initiating payment:
-   ```typescript
-   if (!email || !phoneNumber) {
-     throw new Error('Required fields missing');
-   }
-   ```
-
-## Contributing 🤝
-
-We welcome contributions! Here's how you can help:
+Contributions to Paymob React are welcome! Here's how you can contribute:
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Create a new branch for your feature or bug fix
+3. Make your changes and commit them
+4. Push your changes to your fork
+5. Submit a pull request to the main repository
 
 ## License ⚖️
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Support 💬
+## Support
 
-- 📫 For bugs and feature requests, open an issue on [GitHub](https://github.com/seifeldinio/paymob-react/issues)
-- 💡 For questions and discussions, use the GitHub Discussions feature
-- 📝 Check out our [Wiki](https://github.com/seifeldinio/paymob-react/wiki) for additional documentation
-
-## Acknowledgments 🙏
-
-- Thanks to all contributors who have helped shape this package
-- Special thanks to the Paymob team for their excellent payment infrastructure
+For any questions or issues, please [open an issue](https://github.com/seifeldinio/paymob-react/issues) on GitHub.
